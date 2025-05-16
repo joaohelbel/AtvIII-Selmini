@@ -1,9 +1,5 @@
-from flask import Flask, jsonify, render_template, json, request, Response
-import config
-import requests
+from flask import Flask, render_template
 from banco import engine
-from sqlalchemy import create_engine, text
-from sqlalchemy.orm import Session
 
 app = Flask(__name__)
 
@@ -11,3 +7,25 @@ pedidos_concluidos = []
 pedidos_ativos = []
 pedidos_cancelados = []
 
+@app.route('/')
+def index():
+    return render_template(
+        'index/index.html',
+        title='Eletromercio - Home',
+        pedidos_ativos=pedidos_ativos,
+        pedidos_concluidos=pedidos_concluidos,
+        pedidos_cancelados=pedidos_cancelados
+    )
+
+@app.route('/pedidos')
+def pedidos():
+    return render_template(
+        'index/pedidos.html',
+        title='Eletromercio - Pedidos',
+        pedidos_ativos=pedidos_ativos,
+        pedidos_concluidos=pedidos_concluidos,
+        pedidos_cancelados=pedidos_cancelados
+    )
+
+if __name__ == '__main__':
+    app.run(debug=True)
