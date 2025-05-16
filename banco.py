@@ -5,4 +5,4 @@ import mysql.connector
 
 engine = create_engine(conexao_banco)
 Session = sessionmaker(bind=engine)
-Base = declarative_base()
+
