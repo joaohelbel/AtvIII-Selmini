@@ -4,12 +4,12 @@ from modelo import Pedido, ItemPedido, Produto, Cliente
 def popular_banco():
     with Session() as session:
         clientes = [
-            Cliente(nome='Joao Pedro', saldo=12000),
-            Cliente(nome='Bianca Cristine', saldo=15000),
-            Cliente(nome='Henrique Lecce', saldo=20000),    
-            Cliente(nome='Marcos Selmini', saldo=25000),
+            Cliente(nome='Joao Pedro', saldo=1200000),
+            Cliente(nome='Bianca Cristine', saldo=1500000),
+            Cliente(nome='Henrique Lecce', saldo=2000000),    
+            Cliente(nome='Marcos Selmini', saldo=2500000),
             Cliente(nome='Flavio Azevedo', saldo=0),
-            Cliente(nome='Carlos Rafael', saldo=1000),
+            Cliente(nome='Carlos Rafael', saldo=100000),
         ]
         produtos = [
             Produto(nome='iPhone 14 Pro Max', preco=7999.00, estoque=10),

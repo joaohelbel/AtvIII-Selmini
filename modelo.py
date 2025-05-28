@@ -1,7 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship, declarative_base
 
-
 Base = declarative_base()
 
 class Cliente(Base):
@@ -21,8 +20,8 @@ class Pedido(Base):
     __tablename__ = 'pedidos'
     id = Column(Integer, primary_key=True)
     cliente_id = Column(Integer, ForeignKey('clientes.id'))
-    cliente = relationship('Cliente')
-    itens = relationship('ItemPedido')
+    cliente = relationship('Cliente')  
+    itens = relationship('ItemPedido', back_populates='pedido')  
 
 class ItemPedido(Base):
     __tablename__ = 'itens_pedido'
@@ -30,7 +29,5 @@ class ItemPedido(Base):
     pedido_id = Column(Integer, ForeignKey('pedidos.id'))
     produto_id = Column(Integer, ForeignKey('produtos.id'))
     quantidade = Column(Integer)
-    pedido = relationship('Pedido')
+    pedido = relationship('Pedido', back_populates='itens')
     produto = relationship('Produto')
-
-

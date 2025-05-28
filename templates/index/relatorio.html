@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,12 +10,156 @@
 </head>
 
 <body>
-    
-    <h1>Bem-vindo ao Eletromercio</h1>
-    <p>Esta é a página inicial do nosso site.</p>
-    <p>Você pode navegar para outras seções do site usando o menu acima.</p>
-    <p>Se precisar de ajuda, entre em contato conosco!</p>
-    
+    <nav>
+
+        <ul>
+
+            <li><a href="/">Home</a></li>
+            <li><a href="/relatorio">Relatório</a></li>
+            <li><a href="/status">Status</a></li>
+
+        </ul>
+
+    </nav>
+
+     <h1>Relatório de Pedidos - Nota Fiscal</h1>
+
+    {% if pedidos %}
+        {% for pedido in pedidos %}
+            <div class="nota-fiscal">
+                <h2>Pedido #{{ pedido.id }}</h2>
+                <p><strong>Cliente:</strong> {{ pedido.cliente.nome }}</p>
+
+                <div class="produtos">
+                    <p><strong>Itens:</strong></p>
+                    <ul>
+                        {% set total = 0 %}
+                        {% for item in pedido.itens %}
+                            <li>{{ item.produto.nome }} - {{ item.quantidade }} x R$ {{ '%.2f' % item.produto.preco }}</li>
+                            {% set total = total + (item.quantidade * item.produto.preco) %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Nenhum pedido registrado até o momento.</p>
+    {% endif %}
 </body>
 
 </html>
+
+<style>
+ body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            padding: 20px;
+        }
+
+        .nota-fiscal {
+            background-color: #1e1e1e;
+            border: 1px solid #555;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .nota-fiscal h2 {
+            color: #ffd700;
+        }
+
+        .produtos {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .produtos li {
+            margin-left: 20px;
+        }
+
+        .total {
+            font-weight: bold;
+            color: #90ee90;
+        }
+
+    p {
+        color: var(--secondary-color);
+        text-align: center;
+        font-size: 1.1em;
+        margin-top: 40px;
+    }
+
+    :root {
+        --primary-color: rgb(1, 0, 33);
+        --secondary-color: rgb(254, 255, 246);
+        --accent-color: rgb(114, 118, 255);
+        --background-color: rgb(5, 5, 5);
+    }
+    
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #050505;
+        margin: 0;
+        padding: 20px;
+    }
+
+    nav {
+        background-color: transparent;
+        color: rgba(222, 223, 255, 0);
+        padding: 10px;
+        text-align: right;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1500;
+        backdrop-filter: blur(15px);
+    }
+
+    nav a {
+        color: rgb(255, 242, 213);
+        text-decoration: none;
+    }
+
+    nav a:hover {
+        color: rgb(255, 244, 121);
+        text-decoration: underline;
+    }
+
+    nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li {
+        display: inline;
+        margin-right: 20px;
+    }
+
+    .section {
+        background-color: rgb(1, 0, 33);
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    .hero {
+        background-color: rgb(1, 0, 33);
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+        align-items: center;
+        text-align: center;
+        color: rgb(254, 255, 246);
+        font-size: 24px;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+</style>
